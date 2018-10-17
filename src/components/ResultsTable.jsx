@@ -1,11 +1,13 @@
 import React from 'react';
 import { Table, Badge } from 'reactstrap';
 import { randomElement } from '../helpers';
+import nanoid from 'nanoid';
 
 const ResultsItem = props => {
   const name = props.owner.display_name;
-  const title = props.title;
+  const userId = props.owner.user_id;
   const answerCount = props.answer_count;
+  const title = props.title;
   const tags = props.tags;
   const colors = [
     'primary',
@@ -19,12 +21,16 @@ const ResultsItem = props => {
   ];
   return (
     <tr>
-      <th scope="row">{name}</th>
+      <th onClick={() => props.getUserQuestions(userId)} scope="row">
+        {name}
+      </th>
       <td>{title}</td>
       <td>{answerCount}</td>
       <td>
         {tags.map(tag => (
-          <Badge color={randomElement(colors)}>{tag}</Badge>
+          <Badge key={nanoid(10)} color={randomElement(colors)}>
+            {tag}
+          </Badge>
         ))}
       </td>
     </tr>
@@ -43,7 +49,11 @@ const ResultsTable = props => (
     </thead>
     <tbody>
       {props.searchResults.searchResults.map(item => (
-        <ResultsItem key={item.owner.user_id} {...item} />
+        <ResultsItem
+          getUserQuestions={props.getUserQuestions}
+          key={nanoid(10)}
+          {...item}
+        />
       ))}
     </tbody>
   </Table>

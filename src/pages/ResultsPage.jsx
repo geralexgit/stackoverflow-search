@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ResultsTable from '../components/ResultsTable';
 import { connect } from 'react-redux';
+import { callGetUserQuestions } from '../action-creators';
 
-const ResultsPage = props => (
-  <ResultsTable searchResults={props.searchResults} />
-);
+class ResultsPage extends Component {
+  constructor(props) {
+    super(props);
+    this.getUserQuestions = this.getUserQuestions.bind(this);
+  }
+  getUserQuestions = userId => {
+    this.props.callGetUserQuestions(userId);
+  };
+  render() {
+    return (
+      <ResultsTable
+        searchResults={this.props.searchResults}
+        getUserQuestions={this.getUserQuestions}
+      />
+    );
+  }
+}
 
 const mapStateToProps = state => {
   const { searchResults } = state;
   return { searchResults };
 };
 
-export default connect(mapStateToProps)(ResultsPage);
+const mapDispatchToProps = {
+  callGetUserQuestions
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResultsPage);
