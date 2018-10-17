@@ -1,6 +1,14 @@
 import React from 'react';
 import ResultsTable from '../components/ResultsTable';
+import { connect } from 'react-redux';
 
-const ResultsPage = () => <ResultsTable />;
+const ResultsPage = props => (
+  <ResultsTable searchResults={props.searchResults} />
+);
 
-export default ResultsPage;
+const mapStateToProps = state => {
+  const { searchResults } = state;
+  return { searchResults };
+};
+
+export default connect(mapStateToProps)(ResultsPage);
