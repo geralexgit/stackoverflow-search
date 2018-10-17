@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { routes } from './router/router-config';
+import RouteWithSubRoutes from './components/RouteWithSubRoutes';
 
-import SearchPage from './pages/SearchPage';
+import './App.css';
 
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
-				<SearchPage />
-			</div>
+			<Router>
+				<div>
+					{routes.map((route, i) => (
+						<RouteWithSubRoutes key={i} {...route} />
+					))}
+				</div>
+			</Router>
 		);
 	}
 }
