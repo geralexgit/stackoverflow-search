@@ -4,6 +4,7 @@ import {
   GET_USER_QUESTIONS_SUCCESS
 } from '../actions/';
 import { getUserQuestions } from '../api';
+import { doTogglePanel } from './panel';
 
 export function getUserQuestionsIsLoading(bool) {
   return {
@@ -34,6 +35,7 @@ export function callGetUserQuestions(userId) {
       .then(res => {
         dispatch(getUserQuestionsSuccess(res.data.items));
         dispatch(getUserQuestionsIsLoading(false));
+        dispatch(doTogglePanel(true));
       })
       .catch(error => {
         console.error('axios error', error);

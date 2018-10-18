@@ -4,7 +4,7 @@ const initialState = {
   panelIsOpen: false
 };
 
-export const panelOptions = (state = initialState, action) => {
+export const panel = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_PANEL:
       return { ...state, panelIsOpen: action.panelIsOpen };

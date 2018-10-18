@@ -4,14 +4,14 @@ import {
   searchResults,
   currentRoute,
   userQuestions,
-  panelOptions
+  panel
 } from './reducers/';
 
 const rootReducer = combineReducers({
   searchResults,
   currentRoute,
   userQuestions,
-  panelOptions,
+  panel,
   routing: routerReducer
 });
 

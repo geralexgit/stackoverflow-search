@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, Badge } from 'reactstrap';
 import nanoid from 'nanoid';
+import { connect } from 'react-redux';
+
+import { callGetUserQuestions } from '../action-creators';
 
 const ResultsItem = props => {
   const name = props.owner.display_name;
@@ -8,9 +11,10 @@ const ResultsItem = props => {
   const answerCount = props.answer_count;
   const title = props.title;
   const tags = props.tags;
+
   return (
     <tr>
-      <th onClick={() => props.getUserQuestions(userId)} scope="row">
+      <th onClick={() => props.onUserClick(userId)} scope="row">
         {name}
       </th>
       <td>{title}</td>
@@ -26,26 +30,45 @@ const ResultsItem = props => {
   );
 };
 
-const ResultsTable = props => (
-  <Table hover responsive>
-    <thead>
-      <tr>
-        <th>Автор</th>
-        <th>Тема</th>
-        <th>Ответов</th>
-        <th>Теги</th>
-      </tr>
-    </thead>
-    <tbody>
-      {props.searchResults.searchResults.map(item => (
-        <ResultsItem
-          getUserQuestions={props.getUserQuestions}
-          key={nanoid(10)}
-          {...item}
-        />
-      ))}
-    </tbody>
-  </Table>
-);
+class ResultsTable extends Component {
+  constructor(props) {
+    super(props);
+    this.getUserQuestions = this.getUserQuestions.bind(this);
+  }
+  getUserQuestions = userId => {
+    this.props.callGetUserQuestions(userId);
+  };
+  render() {
+    return (
+      <Table hover responsive>
+        <thead>
+          <tr>
+            <th>Автор</th>
+            <th>Тема</th>
+            <th>Ответов</th>
+            <th>Теги</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.props.items &&
+            this.props.items.map(item => (
+              <ResultsItem
+                onUserClick={this.getUserQuestions}
+                key={nanoid(10)}
+                {...item}
+              />
+            ))}
+        </tbody>
+      </Table>
+    );
+  }
+}
 
-export default ResultsTable;
+const mapDispatchToProps = {
+  callGetUserQuestions
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ResultsTable);
