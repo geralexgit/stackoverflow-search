@@ -28,19 +28,18 @@ export function searchResultsSuccess(searchResults) {
 }
 
 export function makeSearch(searchTerm) {
-  console.log(searchTerm);
   return dispatch => {
     dispatch(searchResultsIsLoading(true));
     return search(searchTerm)
       .then(res => {
-        dispatch(searchResultsIsLoading(false));
         dispatch(searchResultsSuccess(res.data.items));
         dispatch(doChangeRoute('/results'));
+        dispatch(searchResultsIsLoading(false));
       })
       .catch(error => {
         console.error('axios error', error);
+        dispatch(searchResultsError(true));
         dispatch(searchResultsIsLoading(false));
-        dispatch(searchResultsSuccess(true));
       });
   };
 }

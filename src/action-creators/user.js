@@ -32,13 +32,13 @@ export function callGetUserQuestions(userId) {
     dispatch(getUserQuestionsIsLoading(true));
     return getUserQuestions(userId)
       .then(res => {
-        dispatch(getUserQuestionsIsLoading(false));
         dispatch(getUserQuestionsSuccess(res.data.items));
+        dispatch(getUserQuestionsIsLoading(false));
       })
       .catch(error => {
         console.error('axios error', error);
-        dispatch(getUserQuestionsIsLoading(false));
         dispatch(getUserQuestionsError(true));
+        dispatch(getUserQuestionsIsLoading(false));
       });
   };
 }

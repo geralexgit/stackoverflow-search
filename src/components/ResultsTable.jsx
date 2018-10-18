@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table, Badge } from 'reactstrap';
-import { randomElement } from '../helpers';
 import nanoid from 'nanoid';
 
 const ResultsItem = props => {
@@ -9,16 +8,6 @@ const ResultsItem = props => {
   const answerCount = props.answer_count;
   const title = props.title;
   const tags = props.tags;
-  const colors = [
-    'primary',
-    'secondary',
-    'success',
-    'danger',
-    'warning',
-    'info',
-    'light',
-    'dark'
-  ];
   return (
     <tr>
       <th onClick={() => props.getUserQuestions(userId)} scope="row">
@@ -28,7 +17,7 @@ const ResultsItem = props => {
       <td>{answerCount}</td>
       <td>
         {tags.map(tag => (
-          <Badge key={nanoid(10)} color={randomElement(colors)}>
+          <Badge key={nanoid(10)} color="primary">
             {tag}
           </Badge>
         ))}

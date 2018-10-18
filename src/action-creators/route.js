@@ -8,7 +8,7 @@ export function changeRoute(currentRoute) {
   };
 }
 
-export function doChangeRoute(currentRoute) {
-  history.push(currentRoute);
-  return dispatch => dispatch(changeRoute(currentRoute));
+export function doChangeRoute(newRoute) {
+  history.push(newRoute);
+  return dispatch => dispatch(changeRoute(newRoute));
 }
