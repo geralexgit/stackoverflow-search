@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ResultsTable from './ResultsTable';
 import { connect } from 'react-redux';
 import { doTogglePanel } from '../action-creators';
+import Loader from './Loader';
 
 class Panel extends Component {
 	constructor(props) {
@@ -35,10 +36,14 @@ class Panel extends Component {
 				>
 					<ModalHeader toggle={hidePanel}>Modal title</ModalHeader>
 					<ModalBody>
-						<ResultsTable
-							items={this.props.panel.panelItems}
-							toggle={hidePanel}
-						/>
+						{this.props.panel.panelContentIsLoading ? (
+							<Loader />
+						) : (
+							<ResultsTable
+								items={this.props.panel.panelItems}
+								toggle={hidePanel}
+							/>
+						)}
 					</ModalBody>
 					<ModalFooter>
 						<Button color="danger" onClick={hidePanel}>

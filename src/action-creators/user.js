@@ -6,6 +6,7 @@ import {
 import { getUserQuestions } from '../api';
 import { doTogglePanel } from './panel';
 import { loadPanelContent } from './panel';
+import { panelContentLoading } from '../action-creators';
 
 export function getUserQuestionsIsLoading(bool) {
 	return {
@@ -31,17 +32,20 @@ export function getUserQuestionsSuccess(userQuestions) {
 export function fetchGetUserQuestions(userId) {
 	return dispatch => {
 		dispatch(getUserQuestionsIsLoading(true));
+		dispatch(panelContentLoading(true));
+		dispatch(doTogglePanel(true));
 		return getUserQuestions(userId)
 			.then(res => {
 				dispatch(getUserQuestionsSuccess(res.data.items));
 				dispatch(loadPanelContent(res.data.items));
 				dispatch(getUserQuestionsIsLoading(false));
-				dispatch(doTogglePanel(true));
+				dispatch(panelContentLoading(false));
 			})
 			.catch(error => {
 				console.error('axios error', error);
 				dispatch(getUserQuestionsError(true));
 				dispatch(getUserQuestionsIsLoading(false));
+				dispatch(panelContentLoading(false));
 			});
 	};
 }

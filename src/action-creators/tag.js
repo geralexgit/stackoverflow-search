@@ -7,6 +7,8 @@ import { getTagQuestions } from '../api';
 import { doTogglePanel } from './panel';
 import { loadPanelContent } from './panel';
 
+import { panelContentLoading } from '../action-creators';
+
 export function getTagQuestionsIsLoading(bool) {
 	return {
 		type: GET_TAG_QUESTIONS_LOADING,
@@ -31,17 +33,19 @@ export function getTagQuestionsSuccess(tagQuestions) {
 export function fetchGetTagQuestions(tag) {
 	return dispatch => {
 		dispatch(getTagQuestionsIsLoading(true));
+		dispatch(panelContentLoading(true));
+		dispatch(doTogglePanel(true));
 		return getTagQuestions(tag)
 			.then(res => {
 				dispatch(getTagQuestionsSuccess(res.data.items));
 				dispatch(loadPanelContent(res.data.items));
-				dispatch(getTagQuestionsIsLoading(false));
-				dispatch(doTogglePanel(true));
+				dispatch(panelContentLoading(false));
 			})
 			.catch(error => {
 				console.error('axios error', error);
 				dispatch(getTagQuestionsError(true));
 				dispatch(getTagQuestionsIsLoading(false));
+				dispatch(panelContentLoading(false));
 			});
 	};
 }
