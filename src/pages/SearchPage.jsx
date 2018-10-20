@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchForm from '../components/Search';
-import { makeSearch } from '../action-creators/';
+import { doChangeRoute } from '../action-creators/';
 
 class SearchPage extends Component {
 	constructor(props) {
@@ -9,7 +9,7 @@ class SearchPage extends Component {
 		this.startSearch = this.startSearch.bind(this);
 	}
 	startSearch = values => {
-		this.props.makeSearch(values.searchTerm);
+		this.props.doChangeRoute(`results/${values.searchTerm}`);
 	};
 	render() {
 		return (
@@ -23,7 +23,7 @@ class SearchPage extends Component {
 }
 
 const mapDispatchToProps = {
-	makeSearch
+	doChangeRoute
 };
 
 export default connect(

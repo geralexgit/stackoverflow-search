@@ -8,7 +8,7 @@ export const routes = [
 		exact: true
 	},
 	{
-		path: '/results',
+		path: '/results/:searchTerm',
 		component: ResultsPage,
 		exact: true
 	}
