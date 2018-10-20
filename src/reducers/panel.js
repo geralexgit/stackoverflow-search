@@ -2,6 +2,7 @@ import { TOGGLE_PANEL, LOAD_PANEL_ITEMS } from '../actions';
 
 const initialState = {
 	panelIsOpen: false,
+	panelContentIsLoading: false,
 	panelItems: []
 };
 

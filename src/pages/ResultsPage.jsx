@@ -15,7 +15,6 @@ class ResultsPage extends Component {
 	getResults = searchTerm => {
 		this.props.makeSearch(searchTerm);
 	};
-
 	render() {
 		return (
 			<div>

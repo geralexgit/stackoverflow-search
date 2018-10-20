@@ -1,30 +1,41 @@
 import React, { Component } from 'react';
-import { Table, Badge } from 'reactstrap';
 import nanoid from 'nanoid';
+import { Table, Badge } from 'reactstrap';
+import { connect } from 'react-redux';
 import {
 	fetchGetUserQuestions,
-	fetchGetTagQuestions
+	fetchGetTagQuestions,
+	doChangeRoute
 } from '../action-creators';
-import { connect } from 'react-redux';
 
 const ResultsItem = props => {
+	const {
+		question_id,
+		title,
+		tags,
+		onUserClick,
+		onQuestionClick,
+		onTagClick
+	} = props;
 	const name = props.owner.display_name;
 	const userId = props.owner.user_id;
 	const answerCount = props.answer_count;
-	const title = props.title;
-	const tags = props.tags;
 
 	return (
 		<tr>
-			<th onClick={() => props.onUserClick(userId)} scope="row">
+			<th onClick={() => onUserClick(userId)} scope="row">
 				{name}
 			</th>
-			<td>{title}</td>
+			<td>
+				<span onClick={() => onQuestionClick(question_id)}>
+					{title}
+				</span>
+			</td>
 			<td>{answerCount}</td>
 			<td>
 				{tags.map(tag => (
 					<Badge
-						onClick={() => props.onTagClick(tag)}
+						onClick={() => onTagClick(tag)}
 						key={nanoid(10)}
 						color="primary"
 					>
@@ -48,6 +59,9 @@ class ResultsTable extends Component {
 	getTagQuestions = tag => {
 		this.props.fetchGetTagQuestions(tag);
 	};
+	getAnswers = questionId => {
+		this.props.doChangeRoute(`/answers/${questionId}`);
+	};
 	render() {
 		return (
 			<Table hover responsive>
@@ -65,6 +79,7 @@ class ResultsTable extends Component {
 							<ResultsItem
 								onUserClick={this.getUserQuestions}
 								onTagClick={this.getTagQuestions}
+								onQuestionClick={this.getAnswers}
 								key={nanoid(10)}
 								{...item}
 							/>
@@ -75,7 +90,11 @@ class ResultsTable extends Component {
 	}
 }
 
-const mapDispatchToProps = { fetchGetUserQuestions, fetchGetTagQuestions };
+const mapDispatchToProps = {
+	fetchGetUserQuestions,
+	fetchGetTagQuestions,
+	doChangeRoute
+};
 
 export default connect(
 	null,

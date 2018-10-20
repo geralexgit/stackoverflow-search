@@ -17,3 +17,9 @@ export const getUserQuestions = userId => {
 export const getTagQuestions = tag => {
 	return axios.get(`${API_URL}/tags/${tag}/faq?site=stackoverflow`);
 };
+
+export const getAnswersList = questionId => {
+	return axios.get(
+		`${API_URL}/questions/${questionId}/answers?order=desc&sort=activity&site=stackoverflow`
+	);
+};

@@ -29,7 +29,6 @@ export function getUserQuestionsSuccess(userQuestions) {
 }
 
 export function fetchGetUserQuestions(userId) {
-	console.log(userId);
 	return dispatch => {
 		dispatch(getUserQuestionsIsLoading(true));
 		return getUserQuestions(userId)

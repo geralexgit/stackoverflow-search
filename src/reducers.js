@@ -5,6 +5,7 @@ import {
 	currentRoute,
 	userQuestions,
 	panel,
+	answers,
 	tag
 } from './reducers/';
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
 	currentRoute,
 	userQuestions,
 	panel,
+	answers,
 	tag,
 	routing: routerReducer
 });
