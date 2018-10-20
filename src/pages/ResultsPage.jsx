@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Col, Row } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ResultsTable from '../components/ResultsTable';
-import { makeSearch } from '../action-creators';
+import { makeSearch, callGetUserQuestions } from '../action-creators';
 
 class ResultsPage extends Component {
 	constructor(props) {
@@ -16,22 +15,11 @@ class ResultsPage extends Component {
 	getResults = searchTerm => {
 		this.props.makeSearch(searchTerm);
 	};
+
 	render() {
 		return (
 			<div>
-				<Container>
-					<Row>
-						<Col sm={7}>
-							<h2>Search results</h2>
-							<ResultsTable
-								items={this.props.searchResults.searchResults}
-							/>
-						</Col>
-						<Col sm={5}>
-							<h2>Fast view panel</h2>
-						</Col>
-					</Row>
-				</Container>
+				<ResultsTable items={this.props.searchResults.searchResults} />
 			</div>
 		);
 	}
@@ -42,7 +30,7 @@ const mapStateToProps = state => {
 	return { searchResults, panel };
 };
 
-const mapDispatchToProps = { makeSearch };
+const mapDispatchToProps = { makeSearch, callGetUserQuestions };
 
 export default withRouter(
 	connect(

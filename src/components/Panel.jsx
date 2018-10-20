@@ -25,6 +25,7 @@ class Panel extends Component {
 		}
 	}
 	render() {
+		const hidePanel = () => this.props.doTogglePanel(false);
 		return (
 			<div>
 				<Modal
@@ -32,19 +33,16 @@ class Panel extends Component {
 					toggle={() => this.props.doTogglePanel(false)}
 					className={this.props.className}
 				>
-					<ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+					<ModalHeader toggle={hidePanel}>Modal title</ModalHeader>
 					<ModalBody>
 						<ResultsTable
-							items={[]}
-							toggle={() => this.props.doTogglePanel(false)}
+							items={this.props.panel.panelItems}
+							toggle={hidePanel}
 						/>
 					</ModalBody>
 					<ModalFooter>
-						<Button color="primary" onClick={this.toggle}>
-							Do Something
-						</Button>{' '}
-						<Button color="secondary" onClick={this.toggle}>
-							Cancel
+						<Button color="danger" onClick={hidePanel}>
+							Close
 						</Button>
 					</ModalFooter>
 				</Modal>
