@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Table, Badge } from 'reactstrap';
 import nanoid from 'nanoid';
-import { callGetUserQuestions } from '../action-creators';
+import {
+	fetchGetUserQuestions,
+	fetchGetTagQuestions
+} from '../action-creators';
 import { connect } from 'react-redux';
 
 const ResultsItem = props => {
@@ -20,7 +23,11 @@ const ResultsItem = props => {
 			<td>{answerCount}</td>
 			<td>
 				{tags.map(tag => (
-					<Badge key={nanoid(10)} color="primary">
+					<Badge
+						onClick={() => props.onTagClick(tag)}
+						key={nanoid(10)}
+						color="primary"
+					>
 						{tag}
 					</Badge>
 				))}
@@ -33,9 +40,13 @@ class ResultsTable extends Component {
 	constructor(props) {
 		super(props);
 		this.getUserQuestions = this.getUserQuestions.bind(this);
+		this.getTagQuestions = this.getTagQuestions.bind(this);
 	}
 	getUserQuestions = userId => {
-		this.props.callGetUserQuestions(userId);
+		this.props.fetchGetUserQuestions(userId);
+	};
+	getTagQuestions = tag => {
+		this.props.fetchGetTagQuestions(tag);
 	};
 	render() {
 		return (
@@ -53,6 +64,7 @@ class ResultsTable extends Component {
 						this.props.items.map(item => (
 							<ResultsItem
 								onUserClick={this.getUserQuestions}
+								onTagClick={this.getTagQuestions}
 								key={nanoid(10)}
 								{...item}
 							/>
@@ -63,7 +75,7 @@ class ResultsTable extends Component {
 	}
 }
 
-const mapDispatchToProps = { callGetUserQuestions };
+const mapDispatchToProps = { fetchGetUserQuestions, fetchGetTagQuestions };
 
 export default connect(
 	null,

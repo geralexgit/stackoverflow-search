@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ResultsTable from '../components/ResultsTable';
-import { makeSearch, callGetUserQuestions } from '../action-creators';
+import { makeSearch } from '../action-creators';
 
 class ResultsPage extends Component {
 	constructor(props) {
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 	return { searchResults, panel };
 };
 
-const mapDispatchToProps = { makeSearch, callGetUserQuestions };
+const mapDispatchToProps = { makeSearch };
 
 export default withRouter(
 	connect(

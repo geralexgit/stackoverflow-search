@@ -1,9 +1,12 @@
 .badge {
-  margin-right: 5px;
+	margin-right: 5px;
 }
 .SearchWrapper {
-  display: block;
-  margin: 0 auto;
-  padding: 15vh 0;
-  max-width: 460px;
+	display: block;
+	margin: 0 auto;
+	padding: 15vh 0;
+	max-width: 460px;
+}
+.modal-dialog {
+	max-width: 800px;
 }
