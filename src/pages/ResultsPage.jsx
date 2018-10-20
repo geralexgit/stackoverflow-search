@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ResultsTable from '../components/ResultsTable';
 import { makeSearch } from '../action-creators';
+import Loader from '../components/Loader';
 
 class ResultsPage extends Component {
 	constructor(props) {
@@ -18,7 +19,13 @@ class ResultsPage extends Component {
 	render() {
 		return (
 			<div>
-				<ResultsTable items={this.props.searchResults.searchResults} />
+				{this.props.searchResults.searchResultsLoading ? (
+					<Loader />
+				) : (
+					<ResultsTable
+						items={this.props.searchResults.searchResults}
+					/>
+				)}
 			</div>
 		);
 	}

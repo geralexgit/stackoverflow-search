@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGetAnswers } from '../action-creators';
 
+import Loader from '../components/Loader';
+import AnswersTable from '../components/AnswersTable';
+
 class AnswersPage extends Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +18,15 @@ class AnswersPage extends Component {
 		this.props.fetchGetAnswers(questionId);
 	}
 	render() {
-		return <h1>Answers here</h1>;
+		return (
+			<div>
+				{this.props.answers.answersLoading ? (
+					<Loader />
+				) : (
+					<AnswersTable items={this.props.answers.answersList} />
+				)}
+			</div>
+		);
 	}
 }
 
