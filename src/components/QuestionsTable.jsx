@@ -31,12 +31,12 @@ const ResultsItem = props => {
                 </button>
             </th>
             <td>
-                <Link to={`/answers/${question_id}`} class="link" onClick={() => onQuestionClick(question_id)}>
+                <Link to={`/answers/${question_id}`} onClick={() => onQuestionClick(question_id)}>
                     {title}
                 </Link>
             </td>
             <td>
-                <Link to={`/answers/${question_id}`} class="link" onClick={() => onQuestionClick(question_id)}>
+                <Link to={`/answers/${question_id}`} onClick={() => onQuestionClick(question_id)}>
                     {answerCount}
                 </Link>
             </td>
