@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import ResultsTable from './ResultsTable';
+import ResultsTable from './QuestionsTable';
 import { connect } from 'react-redux';
 import { doTogglePanel } from '../action-creators';
 import Loader from './Loader';

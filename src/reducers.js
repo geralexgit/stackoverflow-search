@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import {
 	searchResults,
-	currentRoute,
 	userQuestions,
 	panel,
 	answers,
@@ -11,7 +10,6 @@ import {
 
 const rootReducer = combineReducers({
 	searchResults,
-	currentRoute,
 	userQuestions,
 	panel,
 	answers,

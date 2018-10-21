@@ -3,58 +3,56 @@ import nanoid from 'nanoid';
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
-	fetchGetUserQuestions,
-	fetchGetTagQuestions,
-	doChangeRoute
+    fetchGetUserQuestions,
+    fetchGetTagQuestions
 } from '../action-creators';
 
 const Answer = props => {
-	const { score, answer_id } = props;
-	const name = props.owner.display_name;
-	return (
-		<tr>
-			<td>{name}</td>
-			<td>
-				<span>
-					<a
-						target="_blank"
-						rel="noopener noreferrer"
-						href={`https://stackoverflow.com/a/${answer_id}`}
-					>
-						Open
-					</a>
-				</span>
-			</td>
-			<td>{score}</td>
-		</tr>
-	);
+    const { score, answer_id } = props;
+    const name = props.owner.display_name;
+    return (
+        <tr>
+            <td>{name}</td>
+            <td>
+                <span>
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`https://stackoverflow.com/a/${answer_id}`}
+                    >
+                        Open
+                    </a>
+                </span>
+            </td>
+            <td>{score}</td>
+        </tr>
+    );
 };
 
 const AnswersTable = props => (
-	<Table hover responsive>
-		<thead>
-			<tr>
-				<th>Author</th>
-				<th>Link</th>
-				<th>Score</th>
-			</tr>
-		</thead>
-		<tbody>
-			{props.items &&
-				props.items.map(answer => (
-					<Answer key={nanoid(10)} {...answer} />
-				))}
-		</tbody>
-	</Table>
+    <Table hover responsive>
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Link</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {props.items &&
+                props.items.map(answer => (
+                    <Answer key={nanoid(10)} {...answer} />
+                ))}
+        </tbody>
+    </Table>
 );
 
 const mapDispatchToProps = {
-	fetchGetUserQuestions,
-	fetchGetTagQuestions,
-	doChangeRoute
+    fetchGetUserQuestions,
+    fetchGetTagQuestions
 };
 
 export default connect(
-	null,
-	mapDispatchToProps
+    null,
+    mapDispatchToProps
 )(AnswersTable);
