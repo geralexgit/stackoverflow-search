@@ -5,7 +5,8 @@ import ResultsTable from '../components/QuestionsTable';
 import {
     makeSearch,
     fetchGetUserQuestions,
-    fetchGetTagQuestions
+    fetchGetTagQuestions,
+    sortSearchResultsByAuthor
 } from '../action-creators';
 import Loader from '../components/Loader';
 
@@ -15,6 +16,7 @@ class ResultsPage extends Component {
         this.getResults = this.getResults.bind(this);
         this.getUserQuestions = this.getUserQuestions.bind(this);
         this.getTagQuestions = this.getTagQuestions.bind(this);
+        this.sortByAuthor = this.sortByAuthor.bind(this);
     }
     componentDidMount() {
         this.getResults(this.props.match.params.searchTerm);
@@ -28,6 +30,9 @@ class ResultsPage extends Component {
     getTagQuestions = tag => {
         this.props.fetchGetTagQuestions(tag);
     };
+    sortByAuthor = () => {
+        this.props.sortSearchResultsByAuthor();
+    };
     render() {
         return (
             <div>
@@ -35,6 +40,9 @@ class ResultsPage extends Component {
                     <Loader />
                 ) : (
                     <ResultsTable
+                        sortByAuthor={this.sortByAuthor}
+                        onUserClick={this.getUserQuestions}
+                        onTagClick={this.getTagQuestions}
                         items={this.props.searchResults.searchResults}
                     />
                 )}
@@ -51,7 +59,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     makeSearch,
     fetchGetUserQuestions,
-    fetchGetTagQuestions
+    fetchGetTagQuestions,
+    sortSearchResultsByAuthor
 };
 
 export default withRouter(

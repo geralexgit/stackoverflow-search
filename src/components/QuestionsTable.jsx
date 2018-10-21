@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import nanoid from 'nanoid';
 import { Table, Badge } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -31,12 +31,18 @@ const ResultsItem = props => {
                 </button>
             </th>
             <td>
-                <Link to={`/answers/${question_id}`} onClick={() => onQuestionClick(question_id)}>
+                <Link
+                    to={`/answers/${question_id}`}
+                    onClick={() => onQuestionClick(question_id)}
+                >
                     {title}
                 </Link>
             </td>
             <td>
-                <Link to={`/answers/${question_id}`} onClick={() => onQuestionClick(question_id)}>
+                <Link
+                    to={`/answers/${question_id}`}
+                    onClick={() => onQuestionClick(question_id)}
+                >
                     {answerCount}
                 </Link>
             </td>
@@ -55,49 +61,40 @@ const ResultsItem = props => {
     );
 };
 
-class QuestionsTable extends Component {
-    constructor(props) {
-        super(props);
-        this.getUserQuestions = this.getUserQuestions.bind(this);
-        this.getTagQuestions = this.getTagQuestions.bind(this);
-    }
-    getUserQuestions = userId => {
-        this.props.fetchGetUserQuestions(userId);
-    };
-    getTagQuestions = tag => {
-        this.props.fetchGetTagQuestions(tag);
-    };
-    render() {
-        return (
-            <Table hover responsive>
-                <thead>
-                    <tr>
-                        <th>Автор</th>
-                        <th>Тема</th>
-                        <th>Ответов</th>
-                        <th>Теги</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.props.items &&
-                        this.props.items.map(item => (
-                            <ResultsItem
-                                onUserClick={this.getUserQuestions}
-                                onTagClick={this.getTagQuestions}
-                                onQuestionClick={this.getAnswers}
-                                key={nanoid(10)}
-                                {...item}
-                            />
-                        ))}
-                </tbody>
-            </Table>
-        );
-    }
-}
+const QuestionsTable = props => (
+    <Table hover responsive>
+        <thead>
+            <tr>
+                <th>
+                    <button
+                        onClick={() => props.sortByAuthor()}
+                        className="button-reset"
+                    >
+                        <b>Author</b>
+                    </button>
+                </th>
+                <th>Theme</th>
+                <th>Answers</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            {props.items &&
+                props.items.map(item => (
+                    <ResultsItem
+                        onUserClick={props.onUserClick}
+                        onTagClick={props.onTagClick}
+                        key={nanoid(10)}
+                        {...item}
+                    />
+                ))}
+        </tbody>
+    </Table>
+);
 
 const mapDispatchToProps = {
     fetchGetUserQuestions,
-    fetchGetTagQuestions,
+    fetchGetTagQuestions
 };
 
 export default connect(
