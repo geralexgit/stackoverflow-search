@@ -3,7 +3,8 @@ import {
     SEARCH_RESULTS_ERROR,
     SEARCH_RESULTS_SUCCESS,
     SORT_RESULTS_BY_AUTHOR,
-    SORT_RESULTS_BY_TITLE
+    SORT_RESULTS_BY_TITLE,
+    SORT_RESULTS_BY_ANSWERS
 } from '../actions';
 
 const initialState = {
@@ -49,6 +50,16 @@ export const searchResults = (state = initialState, action) => {
                         titleB = b.title.toLowerCase();
                     if (titleA < titleB) return -1;
                     if (titleA > titleB) return 1;
+                    return 0;
+                })
+            };
+
+        case SORT_RESULTS_BY_ANSWERS:
+            return {
+                ...state,
+                searchResults: state.searchResults.slice().sort(function(a, b) {
+                    if (a.answer_count > b.answer_count) return -1;
+                    if (a.answer_count < b.answer_count) return 1;
                     return 0;
                 })
             };

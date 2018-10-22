@@ -7,7 +7,8 @@ import {
     fetchGetUserQuestions,
     fetchGetTagQuestions,
     sortSearchResultsByAuthor,
-    sortSearchResultsByTitle
+    sortSearchResultsByTitle,
+    sortSearchResultsByAnswers
 } from '../action-creators';
 import Loader from '../components/Loader';
 
@@ -19,6 +20,7 @@ class ResultsPage extends Component {
         this.getTagQuestions = this.getTagQuestions.bind(this);
         this.sortByAuthor = this.sortByAuthor.bind(this);
         this.sortByTitle = this.sortByTitle.bind(this);
+        this.sortByAnswers = this.sortByAnswers.bind(this);
     }
     componentDidMount() {
         this.getResults(this.props.match.params.searchTerm);
@@ -38,6 +40,9 @@ class ResultsPage extends Component {
     sortByTitle = () => {
         this.props.sortSearchResultsByTitle();
     };
+    sortByAnswers = () => {
+        this.props.sortSearchResultsByAnswers();
+    };
     render() {
         return (
             <div>
@@ -47,6 +52,7 @@ class ResultsPage extends Component {
                     <ResultsTable
                         sortByTitle={this.sortByTitle}
                         sortByAuthor={this.sortByAuthor}
+                        sortByAnswers={this.sortByAnswers}
                         onUserClick={this.getUserQuestions}
                         onTagClick={this.getTagQuestions}
                         items={this.props.searchResults.searchResults}
@@ -67,7 +73,8 @@ const mapDispatchToProps = {
     fetchGetUserQuestions,
     fetchGetTagQuestions,
     sortSearchResultsByAuthor,
-    sortSearchResultsByTitle
+    sortSearchResultsByTitle,
+    sortSearchResultsByAnswers
 };
 
 export default withRouter(
