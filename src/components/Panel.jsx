@@ -18,9 +18,6 @@ class Panel extends Component {
         this.state = {
             panelIsOpen: false
         };
-        this.getUserQuestions = this.getUserQuestions.bind(this);
-        this.getTagQuestions = this.getTagQuestions.bind(this);
-        this.getPanelState = this.getPanelState.bind(this);
     }
     getPanelState = () => {
         const { panelIsOpen } = this.props.panel;

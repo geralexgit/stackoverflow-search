@@ -13,15 +13,6 @@ import {
 import Loader from '../components/Loader';
 
 class ResultsPage extends Component {
-    constructor(props) {
-        super(props);
-        this.getResults = this.getResults.bind(this);
-        this.getUserQuestions = this.getUserQuestions.bind(this);
-        this.getTagQuestions = this.getTagQuestions.bind(this);
-        this.sortByAuthor = this.sortByAuthor.bind(this);
-        this.sortByTitle = this.sortByTitle.bind(this);
-        this.sortByAnswers = this.sortByAnswers.bind(this);
-    }
     componentDidMount() {
         this.getResults(this.props.match.params.searchTerm);
     }
