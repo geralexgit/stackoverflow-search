@@ -2,7 +2,8 @@ import {
     SEARCH_RESULTS_LOADING,
     SEARCH_RESULTS_ERROR,
     SEARCH_RESULTS_SUCCESS,
-    SORT_RESULTS_BY_AUTHOR
+    SORT_RESULTS_BY_AUTHOR,
+    SORT_RESULTS_BY_TITLE    
 } from '../actions/';
 import { search } from '../api';
 
@@ -30,6 +31,12 @@ export function searchResultsSuccess(searchResults) {
 export function sortSearchResultsByAuthor() {
     return {
         type: SORT_RESULTS_BY_AUTHOR
+    };
+}
+
+export function sortSearchResultsByTitle() {
+    return {
+        type: SORT_RESULTS_BY_TITLE
     };
 }
 

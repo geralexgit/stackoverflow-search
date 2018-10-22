@@ -73,7 +73,14 @@ const QuestionsTable = props => (
                         <b>Author</b>
                     </button>
                 </th>
-                <th>Theme</th>
+                <th>
+                    <button
+                        onClick={() => props.sortByTitle()}
+                        className="button-reset"
+                    >
+                        <b>Theme</b>
+                    </button>
+                </th>
                 <th>Answers</th>
                 <th>Tags</th>
             </tr>
