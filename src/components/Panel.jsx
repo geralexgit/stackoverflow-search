@@ -55,7 +55,7 @@ class Panel extends Component {
                     toggle={hidePanel}
                     className={this.props.className}
                 >
-                    <ModalHeader toggle={hidePanel}>Modal title</ModalHeader>
+                    <ModalHeader toggle={hidePanel}>Fast view panel</ModalHeader>
                     <ModalBody>
                         {this.props.panel.panelContentIsLoading ? (
                             <Loader />
