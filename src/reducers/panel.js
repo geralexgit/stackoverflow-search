@@ -3,7 +3,8 @@ import {
     LOAD_PANEL_ITEMS,
     PANEL_CONTENT_LOADING,
     SORT_PANEL_CONTENT_BY_AUTHOR,
-    SORT_PANEL_CONTENT_BY_TITLE
+    SORT_PANEL_CONTENT_BY_TITLE,
+    SORT_PANEL_CONTENT_BY_ANSWERS
 } from '../actions';
 
 const initialState = {
@@ -46,6 +47,16 @@ export const panel = (state = initialState, action) => {
                         titleB = b.title.toLowerCase();
                     if (titleA < titleB) return -1;
                     if (titleA > titleB) return 1;
+                    return 0;
+                })
+            };
+
+        case SORT_PANEL_CONTENT_BY_ANSWERS:
+            return {
+                ...state,
+                panelItems: state.panelItems.slice().sort(function(a, b) {
+                    if (a.answer_count > b.answer_count) return -1;
+                    if (a.answer_count < b.answer_count) return 1;
                     return 0;
                 })
             };

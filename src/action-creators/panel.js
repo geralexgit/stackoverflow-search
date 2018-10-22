@@ -3,7 +3,8 @@ import {
     LOAD_PANEL_ITEMS,
     PANEL_CONTENT_LOADING,
     SORT_PANEL_CONTENT_BY_AUTHOR,
-    SORT_PANEL_CONTENT_BY_TITLE
+    SORT_PANEL_CONTENT_BY_TITLE,
+    SORT_PANEL_CONTENT_BY_ANSWERS
 } from '../actions';
 
 export function togglePanel(bool) {
@@ -33,10 +34,15 @@ export function sortPanelContentByAuthor() {
     };
 }
 
-
 export function sortPanelContentByTitle() {
     return {
         type: SORT_PANEL_CONTENT_BY_TITLE
+    };
+}
+
+export function sortPanelContentByAnswers() {
+    return {
+        type: SORT_PANEL_CONTENT_BY_ANSWERS
     };
 }
 

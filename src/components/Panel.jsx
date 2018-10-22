@@ -7,7 +7,8 @@ import {
     fetchGetUserQuestions,
     fetchGetTagQuestions,
     sortPanelContentByAuthor,
-    sortPanelContentByTitle
+    sortPanelContentByTitle,
+    sortPanelContentByAnswers
 } from '../action-creators';
 import Loader from './Loader';
 
@@ -45,13 +46,16 @@ class Panel extends Component {
     sortByTitle = () => {
         this.props.sortPanelContentByTitle();
     };
+    sortByAnswers = () => {
+        this.props.sortPanelContentByAnswers();
+    };
     render() {
         const hidePanel = () => this.props.doTogglePanel(false);
         return (
             <div>
                 <Modal
                     isOpen={this.state.panelIsOpen}
-                    toggle={() => this.props.doTogglePanel(false)}
+                    toggle={hidePanel}
                     className={this.props.className}
                 >
                     <ModalHeader toggle={hidePanel}>Modal title</ModalHeader>
@@ -62,6 +66,7 @@ class Panel extends Component {
                             <ResultsTable
                                 sortByAuthor={this.sortByAuthor}
                                 sortByTitle={this.sortByTitle}
+                                sortByAnswers={this.sortByAnswers}
                                 onUserClick={this.getUserQuestions}
                                 onTagClick={this.getTagQuestions}
                                 items={this.props.panel.panelItems}
@@ -90,7 +95,8 @@ const mapDispatchToProps = {
     fetchGetUserQuestions,
     fetchGetTagQuestions,
     sortPanelContentByAuthor,
-    sortPanelContentByTitle
+    sortPanelContentByTitle,
+    sortPanelContentByAnswers
 };
 
 export default connect(
