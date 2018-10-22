@@ -13,7 +13,7 @@ const SearchForm = props => (
 						component="input"
 						type="text"
 						className="form-control"
-						placeholder="Search"
+						placeholder=""
 					/>
 					<InputGroupAddon addonType="append">
 						<Button
