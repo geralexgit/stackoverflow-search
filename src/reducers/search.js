@@ -33,7 +33,7 @@ export const searchResults = (state = initialState, action) => {
             return {
                 ...state,
                 searchResults: state.searchResults.slice().sort(function(a, b) {
-                    var nameA = a.owner.display_name.toLowerCase(),
+                    const nameA = a.owner.display_name.toLowerCase(),
                         nameB = b.owner.display_name.toLowerCase();
                     if (nameA < nameB) return -1;
                     if (nameA > nameB) return 1;
@@ -45,7 +45,7 @@ export const searchResults = (state = initialState, action) => {
             return {
                 ...state,
                 searchResults: state.searchResults.slice().sort(function(a, b) {
-                    var titleA = a.title.toLowerCase(),
+                    const titleA = a.title.toLowerCase(),
                         titleB = b.title.toLowerCase();
                     if (titleA < titleB) return -1;
                     if (titleA > titleB) return 1;

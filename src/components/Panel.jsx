@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import {
     doTogglePanel,
     fetchGetUserQuestions,
-	fetchGetTagQuestions,
-	sortPanelContentByAuthor
+    fetchGetTagQuestions,
+    sortPanelContentByAuthor,
+    sortPanelContentByTitle
 } from '../action-creators';
 import Loader from './Loader';
 
@@ -41,6 +42,9 @@ class Panel extends Component {
     sortByAuthor = () => {
         this.props.sortPanelContentByAuthor();
     };
+    sortByTitle = () => {
+        this.props.sortPanelContentByTitle();
+    };
     render() {
         const hidePanel = () => this.props.doTogglePanel(false);
         return (
@@ -57,6 +61,7 @@ class Panel extends Component {
                         ) : (
                             <ResultsTable
                                 sortByAuthor={this.sortByAuthor}
+                                sortByTitle={this.sortByTitle}
                                 onUserClick={this.getUserQuestions}
                                 onTagClick={this.getTagQuestions}
                                 items={this.props.panel.panelItems}
@@ -83,8 +88,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     doTogglePanel,
     fetchGetUserQuestions,
-	fetchGetTagQuestions,
-	sortPanelContentByAuthor
+    fetchGetTagQuestions,
+    sortPanelContentByAuthor,
+    sortPanelContentByTitle
 };
 
 export default connect(

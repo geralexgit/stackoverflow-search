@@ -2,7 +2,8 @@ import {
     TOGGLE_PANEL,
     LOAD_PANEL_ITEMS,
     PANEL_CONTENT_LOADING,
-    SORT_PANEL_CONTENT_BY_AUTHOR
+    SORT_PANEL_CONTENT_BY_AUTHOR,
+    SORT_PANEL_CONTENT_BY_TITLE
 } from '../actions';
 
 const initialState = {
@@ -33,6 +34,18 @@ export const panel = (state = initialState, action) => {
                         nameB = b.owner.display_name.toLowerCase();
                     if (nameA < nameB) return -1;
                     if (nameA > nameB) return 1;
+                    return 0;
+                })
+            };
+
+        case SORT_PANEL_CONTENT_BY_TITLE:
+            return {
+                ...state,
+                panelItems: state.panelItems.slice().sort(function(a, b) {
+                    const titleA = a.title.toLowerCase(),
+                        titleB = b.title.toLowerCase();
+                    if (titleA < titleB) return -1;
+                    if (titleA > titleB) return 1;
                     return 0;
                 })
             };

@@ -2,7 +2,8 @@ import {
     TOGGLE_PANEL,
     LOAD_PANEL_ITEMS,
     PANEL_CONTENT_LOADING,
-    SORT_PANEL_CONTENT_BY_AUTHOR
+    SORT_PANEL_CONTENT_BY_AUTHOR,
+    SORT_PANEL_CONTENT_BY_TITLE
 } from '../actions';
 
 export function togglePanel(bool) {
@@ -29,6 +30,13 @@ export function panelContentLoading(bool) {
 export function sortPanelContentByAuthor() {
     return {
         type: SORT_PANEL_CONTENT_BY_AUTHOR
+    };
+}
+
+
+export function sortPanelContentByTitle() {
+    return {
+        type: SORT_PANEL_CONTENT_BY_TITLE
     };
 }
 
