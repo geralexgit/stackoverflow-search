@@ -1,5 +1,5 @@
 ## Stackoverflow search
-- React and Redux test task
+React and Redux test task
 
 ### Required software:
 - [Node.js](https://nodejs.org/en/ "Node.js")
